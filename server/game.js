@@ -55,7 +55,7 @@ function gameLoop(state) {
     if (playerOne.vel.x || playerOne.vel.y) {
         for (let cell of playerOne.snake) {
             if (cell.x === playerOne.pos.x && cell.y === playerOne.pos.y) {
-                return 2
+                return 2;
             }
         }
 
@@ -74,7 +74,7 @@ function randomFood(state) {
 
     for (let cell of state.player.snake) {
         if (cell.x === food.x && cell.y === food.y) {
-            return randomFood(state)
+            return randomFood(state);
         }
     }
 
