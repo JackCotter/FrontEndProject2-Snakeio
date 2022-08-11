@@ -2,7 +2,8 @@ const { GRID_SIZE } = require('./constants');
 
 module.exports = {
     createGameState,
-    gameLoop
+    gameLoop,
+    getUpdatedVelocity
 }
 
 function createGameState () {
@@ -26,7 +27,8 @@ function createGameState () {
             x: 7,
             y: 7
         },
-        gridsize: GRID_SIZE
+        gridsize: GRID_SIZE,
+        active: true
     };
 }
 
@@ -46,7 +48,7 @@ function gameLoop(state) {
 
     if (state.food.x === playerOne.pos.x && state.food.y === playerOne.pos.y){
         playerOne.snake.push({...playerOne.pos});
-        playerOne.position.x += playerOne.vel.x;
+        playerOne.pos.x += playerOne.vel.x;
         playerOne.pos.y += playerOne.vel.y;
         randomFood(state);
     }
@@ -78,4 +80,22 @@ function randomFood(state) {
     }
 
     state.food = food;
+}
+
+function getUpdatedVelocity(keyCode){
+    switch (keyCode) {
+        case 37: {//left
+            return { x:-1, y:0 }
+        }
+        case 38: {//down
+            return { x:0, y:-1 }
+        }
+        case 39: {//right
+            return { x:1, y:0 }
+        }
+        case 40: {//up
+            return { x:0, y:1 }
+        }
+        
+    }
 }

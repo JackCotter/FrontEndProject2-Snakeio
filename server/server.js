@@ -1,5 +1,5 @@
 
-const { createGameState, gameLoop } = require('./game');
+const { createGameState, gameLoop, getUpdatedVelocity } = require('./game');
 const { FRAME_RATE } = require('./constants');
 
 const io = require("socket.io")();
@@ -10,6 +10,22 @@ const io = require("socket.io")();
 
 io.on("connection", client => {
     const state = createGameState();
+
+    client.on('keydown', handleKeydown);
+    function handleKeydown(keyCode) {
+        try {
+            keyCode = parseInt(keyCode);
+        }catch(e){
+            console.error(e);
+            return;
+        }
+
+        const vel = getUpdatedVelocity(keyCode);
+
+        if (vel) {
+            state.player.vel = vel
+        }
+    }
 
     startGameInterval(client, state);
 });
