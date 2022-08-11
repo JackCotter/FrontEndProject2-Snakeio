@@ -2,12 +2,11 @@
 const { createGameState, gameLoop } = require('./game');
 const { FRAME_RATE } = require('./constants');
 
-const io = require("socket.io")(3000, {
-    cors:{
-        origin: ['http://127.0.0.1:8080'],
-        credentials: true
-    },
-})
+const io = require("socket.io")();
+
+//io.origins(["http://127.0.0.1:8080/"]);
+
+//io.withCredentials(true)
 
 io.on("connection", client => {
     const state = createGameState();
@@ -28,4 +27,4 @@ function startGameInterval(client, state) {
     }, 1000/FRAME_RATE);
 }
 
-//io.listen(3000);
+io.listen(8080);

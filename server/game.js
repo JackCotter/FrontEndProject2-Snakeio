@@ -26,8 +26,7 @@ function createGameState () {
             x: 7,
             y: 7
         },
-        gridsize: GRID_SIZE,
-        active: true
+        gridsize: GRID_SIZE
     };
 }
 
@@ -38,14 +37,14 @@ function gameLoop(state) {
 
     const playerOne = state.player;
 
-    playerOne.position.x += playerOne.vel.x;
+    playerOne.pos.x += playerOne.vel.x;
     playerOne.pos.y += playerOne.vel.y;
 
     if(playerOne.pos.x < 0 || playerOne.pos.x > GRID_SIZE || playerOne.pos.y < 0 || playerOne.pos.y > GRID_SIZE) {
         return 2;
     }
 
-    if (state.food.x === player.position.x && state.food.y === player.position.y){
+    if (state.food.x === playerOne.pos.x && state.food.y === playerOne.pos.y){
         playerOne.snake.push({...playerOne.pos});
         playerOne.position.x += playerOne.vel.x;
         playerOne.pos.y += playerOne.vel.y;
@@ -59,7 +58,7 @@ function gameLoop(state) {
             }
         }
 
-        playerOne.snake.push({...playerOne.position});
+        playerOne.snake.push({...playerOne.pos});
         playerOne.snake.shift();
     }
 

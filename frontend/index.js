@@ -4,7 +4,7 @@ const FOOD_COLOUR = '#e66916'
 
 const gamescreen = document.getElementById('gamescreen');
 
-const socket = io('http://localhost:3000');
+const socket = io('http://localhost:8080');
 
 socket.on('init', handleInit);
 socket.on('gameState', handleGamestate);
@@ -50,7 +50,7 @@ function paintPlayer(playerState, size, colour) {
     ctx.fillStyle = colour
 
     for (let cell of snake){
-        ctx.fillRect(cell.x * size + cell.y * size, size, size);
+        ctx.fillRect(cell.x * size, cell.y * size, size, size);
     }
 }
 
