@@ -12,11 +12,14 @@ newGameBtn.addEventListener('click', newGame);
 joinGameBtn.addEventListener('click', joinGame);
 
 function newGame(){
-
+    socket.emit('newGame')
+    init()
 }
 
 function joinGame(){
-    
+    const code = gameCodeInput.ariaValueMax;
+    socket.emit(code);
+    init();
 }
 
 
@@ -31,6 +34,8 @@ let canvas, ctx;
 
 
 function init() {
+    initialScreen.style.display = 'none';
+    gameScreen.style.display = "block"
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
 
@@ -46,7 +51,6 @@ function keydown(e) {
     socket.emit('keydown', e.keyCode)
 }
 
-init();
 
 function paintGame(state) {
     ctx.fillStyle = BG_COLOUR;

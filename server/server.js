@@ -8,10 +8,22 @@ const io = require("socket.io")();
 
 //io.withCredentials(true)
 
+const state = {};
+const clientRooms = {};
+
 io.on("connection", client => {
-    const state = createGameState();
 
     client.on('keydown', handleKeydown);
+    client.on('newGame', handleNewGame);
+
+    function handleNewGame () {
+        let roomName = makeid(5);
+        clientRooms[client.id] = roomName;
+        client.emit('gameCode', roomName);
+
+        state[roomName] = createGameState();
+    }
+
     function handleKeydown(keyCode) {
         try {
             keyCode = parseInt(keyCode);
