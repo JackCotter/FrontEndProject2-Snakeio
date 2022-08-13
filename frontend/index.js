@@ -1,7 +1,7 @@
 const BG_COLOUR = '#231f20';
 const SNAKE_COLOUR1 = '#c2c2c2';
-const SNAKE_COLOUR2 = '#b4b4b4';
-const FOOD_COLOUR = '#e66916'
+const SNAKE_COLOUR2 = '#80357E';
+const FOOD_COLOUR = '#e66916';
 
 const gameScreen = document.getElementById('gameScreen');
 const initialScreen = document.getElementById('initialScreen');
