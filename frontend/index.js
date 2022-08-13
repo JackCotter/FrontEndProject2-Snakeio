@@ -108,7 +108,8 @@ function handleGameOver(data){
     } else {
         alert("You Lose :(")
     }
-    gameActive = false
+    gameActive = false;
+    reset();
 }
 
 function handleGameCode(gameCode){
